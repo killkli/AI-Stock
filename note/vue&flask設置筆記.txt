@@ -1,0 +1,10 @@
+安裝 concurrently： npm install concurrently --save-dev
+
+設定 package.json
+在根目錄的 package.json 文件中，你可以添加一個自訂的腳本來同時運行 Flask 和 Vue.js 應用。修改 scripts 部分如下：
+"scripts": {
+  "start": "concurrently --kill-others \"cd backend && python app.py\" \"cd frontend && npm run serve\""
+}
+
+運行應用：　npm start
+
