@@ -1,13 +1,12 @@
+/* eslint-disable */
 import { createRouter, createWebHistory } from 'vue-router';
-import Stock from '../src/views/Stock.vue'
+import StockView from '../src/views/StockView.vue'
 import CurrentStock from '../src/views/stockpages/CurrentStock.vue'
-
-Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/stock/:stock_code',
-    component: Stock,
+    component: StockView,
     props: true,
     children: [
       {

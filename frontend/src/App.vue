@@ -1,35 +1,34 @@
 <template>
-  <div class="container">
-    <h1>股票分析助手</h1>
-    <p>※股票資訊來自奇摩股市</p>
-    <!-- @submit.prevent：阻止表單默認跳轉行為 -->
-    <form class="search" @submit.prevent="handleSubmit">
-      <div class="search-bar">
-        <!-- v-model 會根據輸入框的值動態更新 stockCode變數值 -->
-        <input type="text" v-model="stockCode" class="search-input" placeholder="輸入股票代號...">
-        <button class="search-button" type="submit">搜尋</button>
-      </div>
-    </form>
+  <div>
+    <div class="container">
+      <h1>股票分析助手</h1>
+      <p>※股票資訊來自奇摩股市</p>
+      <!-- @submit.prevent：阻止表單默認跳轉行為 -->
+      <form class="search" @submit.prevent="handleSubmit">
+        <div class="search-bar">
+          <!-- v-model 會根據輸入框的值動態更新 stockCode變數值 -->
+          <input type="text" v-model="stockCode" class="search-input" placeholder="輸入股票代號...">
+          <button class="search-button" type="submit">搜尋</button>
+        </div>
+      </form>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { ref } from 'vue'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      stockCode: ''
-    };
-  },
-  methods: {
-    handleSubmit() {
-      // 使用模板字符串來插入變量 stockCode 到路徑中
-      router.push({ path: `/stock/${this.stockCode}/current` });
+  setup() {
+    const router = useRouter()
+    const stockCode = ref('');
+    const handleSubmit = () => {
+      router.push({ path: `/stock/${stockCode.value}/current` });
     }
-  }
+    return { handleSubmit, stockCode }
+  },
 }
 </script>
 
